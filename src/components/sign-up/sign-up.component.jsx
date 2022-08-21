@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { SignIn } from "../../routes/sign-in/signIn.component";
+
 import { FormInput } from "../form-input/form-input.component";
 import { createNewUserWithEmailAndPassword, createUserFromAuth, signInWithGooglePopup } from "../../utils/firebase/firebase.utils"
 import './sign-up.styles.scss';
@@ -63,11 +63,12 @@ export const SignUp = () => {
     return (
         <div className="sign-up-container">
             <h2>Don't have an account?</h2>
+            <span>Sign up with this form</span>
             <form onSubmit={handleSubmit}>
-                <FormInput label='Name' type='text' name='username' value={username} onChange={handleChange} />
-                <FormInput label='Email' type='email' name='email' value={email} onChange={handleChange} />
-                <FormInput label='Password' type='password' name='password' value={password} onChange={handleChange} />
-                <FormInput label='Confirm password' type='password' name='confirmPassword' value={confirmPassword} onChange={handleChange} />
+                <FormInput required label='Name' type='text' name='username' value={username} onChange={handleChange} />
+                <FormInput required label='Email' type='email' name='email' value={email} onChange={handleChange} />
+                <FormInput required label='Password' type='password' name='password' value={password} onChange={handleChange} />
+                <FormInput required label='Confirm password' type='password' name='confirmPassword' value={confirmPassword} onChange={handleChange} />
                 <Button type='submit'>Sign Up</Button>
             </form>
 
