@@ -19,7 +19,9 @@ export const SignIn = () => {
         <div>
             <h1>Sign In using Google</h1>
             <button onClick={logGoogleUser}>Sign in with Google</button>
+            <SignUp />
         </div>
 
     )
 }
+
