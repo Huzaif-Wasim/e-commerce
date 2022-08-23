@@ -6,7 +6,9 @@ import { Navigation } from "./routes/navigation/navigation.component";
 import { Auth } from "./routes/auth/auth.component";
 
 
+
 const App = () => {
+
   console.log("Inside App");
   return (
     <Routes>

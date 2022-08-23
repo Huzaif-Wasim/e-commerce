@@ -5,9 +5,13 @@ import {
     signInWithPopup,
     GoogleAuthProvider,
     createUserWithEmailAndPassword,
-    signInWithEmailAndPassword
+    signInWithEmailAndPassword,
+    signOut
 } from "firebase/auth";
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/user.context";
+
 
 const firebaseConfig = {
     apiKey: "AIzaSyCO195vaepQD86FUfb6TDpx-tNOVmpu6cQ",
@@ -68,3 +72,8 @@ export const signInUserWithEmailAndPassword = async (email, password) => {
     return await signInWithEmailAndPassword(auth, email, password);
 }
 
+export const signUserOut = async () => {
+    const res = await signOut(auth);
+    console.log("Inside signUserOut", res);
+
+}

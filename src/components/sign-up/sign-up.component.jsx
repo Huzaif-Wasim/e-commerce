@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { FormInput } from "../form-input/form-input.component";
 import { createNewUserWithEmailAndPassword, createUserFromAuth, signInWithGooglePopup } from "../../utils/firebase/firebase.utils"
 import './sign-up.styles.scss';
 import { Button } from '../button/button.component.jsx';
+import { UserContext, UserProvider } from "../../contexts/user.context";
+
 
 const defaultValues = {
     username: '',
@@ -13,12 +15,8 @@ const defaultValues = {
 }
 
 export const SignUp = () => {
-    const logGoogleUser = async () => {
-        const userDetails = await signInWithGooglePopup();
-        console.log(userDetails);
-        const createdUser = await createUserFromAuth(userDetails.user);
-        console.log(createdUser);
-    }
+    const { setCurrentUser } = useContext(UserContext);
+
 
 
 
@@ -46,6 +44,8 @@ export const SignUp = () => {
         try {
             const response = await createNewUserWithEmailAndPassword(email, password);
             console.log(response);
+            setCurrentUser(response.user.email);
+
             await createUserFromAuth({ ...response.user, ['displayName']: username });
             resetFields();
         }

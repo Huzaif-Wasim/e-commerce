@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { createUserFromAuth, signInWithGooglePopup } from "../../utils/firebase/firebase.utils"
 
 import { FormInput } from "../../components/form-input/form-input.component";
 import { Button } from "../../components/button/button.component";
 import { signInUserWithEmailAndPassword } from "../../utils/firebase/firebase.utils.js";
+import { UserContext, UserProvider } from "../../contexts/user.context";
 import './sign-in.styles.scss';
 
 const defaultCreds = {
@@ -13,13 +14,14 @@ const defaultCreds = {
 
 
 export const SignIn = () => {
-
+    const { setCurrentUser } = useContext(UserContext);
     const [creds, setCreds] = useState(defaultCreds);
 
     const logGoogleUser = async () => {
         try {
             const userDetails = await signInWithGooglePopup();
             console.log(userDetails);
+            setCurrentUser(userDetails.user.email);
             const createdUser = await createUserFromAuth(userDetails.user);
             console.log(createdUser);
         }
@@ -40,6 +42,7 @@ export const SignIn = () => {
         event.preventDefault();
         try {
             const response = await signInUserWithEmailAndPassword(email, password);
+            setCurrentUser(response.user.email);
             console.log("sign in with email, password", response);
             resetFields();
         }
