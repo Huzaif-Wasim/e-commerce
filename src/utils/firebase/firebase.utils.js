@@ -6,7 +6,8 @@ import {
     GoogleAuthProvider,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
-    signOut
+    signOut,
+    onAuthStateChanged
 } from "firebase/auth";
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
 import { useContext } from "react";
@@ -76,4 +77,8 @@ export const signUserOut = async () => {
     const res = await signOut(auth);
     console.log("Inside signUserOut", res);
 
+}
+
+export const authStateListener = async (callback) => {
+    return await onAuthStateChanged(auth, callback);
 }

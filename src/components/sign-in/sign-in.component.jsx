@@ -21,7 +21,7 @@ export const SignIn = () => {
         try {
             const userDetails = await signInWithGooglePopup();
             console.log(userDetails);
-            setCurrentUser(userDetails.user.email);
+
             const createdUser = await createUserFromAuth(userDetails.user);
             console.log(createdUser);
         }
@@ -42,7 +42,7 @@ export const SignIn = () => {
         event.preventDefault();
         try {
             const response = await signInUserWithEmailAndPassword(email, password);
-            setCurrentUser(response.user.email);
+
             console.log("sign in with email, password", response);
             resetFields();
         }

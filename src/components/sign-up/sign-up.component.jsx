@@ -44,7 +44,7 @@ export const SignUp = () => {
         try {
             const response = await createNewUserWithEmailAndPassword(email, password);
             console.log(response);
-            setCurrentUser(response.user.email);
+
 
             await createUserFromAuth({ ...response.user, ['displayName']: username });
             resetFields();

@@ -1,10 +1,20 @@
+import { useContext } from "react"
 import { Outlet } from "react-router-dom"
+import { ProductContext } from "../../contexts/products.context"
+import { Product } from "../product/product.component";
+import "./shop.styles.scss";
 
-export const Shop = ({ text }) => {
+export const Shop = () => {
+    const { products } = useContext(ProductContext);
     return (
         <div>
             <Outlet />
-            <h1 className="new-line">{text}</h1>
+            <div className="products-container">
+                {products.map(
+                    ({ id, ...others }) => <Product key={id} {...others} />
+                )}
+            </div>
+
         </div>
 
     )
